@@ -30,8 +30,6 @@ target_station = ['C0A880', 'C0F9A0', 'C0G640', 'C0R190', 'C0X260']
 for target in target_station:
    count = 0
    target_data = list(filter(lambda item: item['station_id'] == target, data))
-   # if target == 'C0F9A0' :
-   #    print (target_data[0]['WDSD'])
    for item in target_data:
       if float(item['WDSD']) == -99.000 or float(item['WDSD']) == -999.000 :
          del item['WDSD']
@@ -39,13 +37,11 @@ for target in target_station:
          count = count + 1
          Max_WDSD = item
          min_WDSD = item
-   # if target == 'C0F9A0' :
-   #    print (target_data)
    if count < 2 :
       result.append([target, 'None'])
    else :
       for curr_WDSD in target_data:
-         if curr_WDSD.has_key('WDSD') :
+         if 'WDSD' in curr_WDSD.keys():
             if curr_WDSD['WDSD'] > Max_WDSD['WDSD']:
                Max_WDSD = curr_WDSD
             if curr_WDSD['WDSD'] < min_WDSD['WDSD']:
